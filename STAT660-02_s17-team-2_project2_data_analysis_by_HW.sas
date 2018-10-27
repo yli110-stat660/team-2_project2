@@ -34,12 +34,12 @@ title2
 ;
 
 footnote1
-'Based on the summary table, the most common reason was medical consultation(23).'
+
 
 ;
 
 footnote2
-'After grouping by ID, we could also find the most common reason for absenteeism for each employee.For example, employee 28 used reason 23 for 32 times.'
+
 
 ;
 
@@ -55,7 +55,7 @@ proc freq
     data =bank_analytic_file
      ;
      table 
-	      age 
+        age 
      /nocum
      ;
 run;
@@ -74,7 +74,7 @@ proc freq
      ;
      table 
         marital
-	   /nocum
+     /nocum
      ;
 run;
 
@@ -83,7 +83,7 @@ proc freq
      ;
      table 
         education
-	   /nocum
+     /nocum
      ;
 run;
 
@@ -101,7 +101,7 @@ proc freq
      ;
      table 
         loan
-	   /nocum
+     /nocum
      ;
 run;
 
@@ -127,17 +127,17 @@ title2
 ;
 
 footnote1
-'Based on the summary table, diseases of the circulatory system had the longest average absenteeism hours which was 42 hours. '
+''
 
 ;
 
 footnote2
-'The the average of absenteeism time in hours was only 6.99 hours.'
+''
 
 ;
 
 footnote3
-'This could tell us that there would be a high chance if a employee who takes absence for the reason of circulatory system would have a longer absenttesim time.' 
+'' 
 
 ;
 *
@@ -175,17 +175,17 @@ title2
 ;
 
 footnote1
-'Based on the summary table, the frequency of each work day in a week was from 19%-22.34% which are very close to 20%.'
+''
 
 ;
 
 footnote2
-'Although day 2 of the week had a bit higher frequency of 22.34%,hypothesis testing will be needed for significance difference test if we are interested in it.'
+''
 
 ;
 
 footnote3
-'Genreally speaking,employees take absence with no preferrence on days. But there could be a special patterns if analyzed by months or seasons.'
+''
 
 ;
 
