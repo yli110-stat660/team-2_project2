@@ -4,96 +4,58 @@
 *******************************************************************************;
 
 * 
-[Dataset 1 Name] frpm1415
+[Dataset 1 Name] bank_nonsubscribe
 
-[Dataset Description] Student Poverty Free or Reduced Price Meals (FRPM) Data,
-AY2014-15
+[Dataset Description] This is a subset of the bank-full dataset with which the clients did not subscribe a term deposit. The bank-full dataset can be found at http://archive.ics.uci.edu/ml/machine-learning-databases/00222/bank.zip
 
-[Experimental Unit Description] California public K-12 schools in AY2014-15
+[Experimental Unit Description] Each client in the Protuguese bank who didn't subscribe a term deposit.
 
-[Number of Observations] 10,393      
+[Number of Observations] 39922                    
 
-[Number of Features] 28
+[Number of Features] 17
 
-[Data Source] The file http://www.cde.ca.gov/ds/sd/sd/documents/frpm1415.xls
-was downloaded and edited to produce file frpm1415-edited.xls by deleting
-worksheet "Title Page", deleting row 1 from worksheet "FRPM School-Level Data",
-reformatting column headers in "FRPM School-Level Data" to remove characters
-disallowed in SAS variable names, and setting all cell values to "Text" format
+[Data Source]  A subset of bank-full with y variable being "no". 
 
-[Data Dictionary] http://www.cde.ca.gov/ds/sd/sd/fsspfrpm.asp
+[Data Dictionary] http://archive.ics.uci.edu/ml/datasets/Bank+Marketing#
 
-[Unique ID Schema] The columns "County Code", "District Code", and "School
-Code" form a composite key, which together are equivalent to the unique id
-column CDS_CODE in dataset gradaf15, and which together are also equivalent to
-the unique id column CDS in dataset sat15.
+[Unique ID Schema] The columns "age", "job", "marital", "education", "default", "housing" and "load" compose an unique ID (hopefully).
 
 --
 
-[Dataset 2 Name] frpm1516
+[Dataset 2 Name] bank_subscribe
 
-[Dataset Description] Student Poverty Free or Reduced Price Meals (FRPM) Data,
-AY2015-16
+[Dataset Description] This is a subset of the bank-full dataset with which the clients subscribed a term deposit.
 
-[Experimental Unit Description] California public K-12 schools in AY2015-16
+[Experimental Unit Description]  Each client in the Protuguese bank who subscribed a term deposit.
 
-[Number of Observations] 10,453     
+[Number of Observations] 5289                    
 
-[Number of Features] 28
+[Number of Features] 17
 
-[Data Source] The file http://www.cde.ca.gov/ds/sd/sd/documents/frpm1516.xls
-was downloaded and edited to produce file frpm1516-edited.xls by deleting
-worksheet "Title Page", deleting row 1 from worksheet "FRPM School-Level Data",
-reformatting column headers in "FRPM School-Level Data" to remove characters
-disallowed in SAS variable names, and setting all cell values to "Text" format
+[Data Source] A subset of bank-full with y variable being "yes".
 
-[Data Dictionary] http://www.cde.ca.gov/ds/sd/sd/fsspfrpm.asp
+[Data Dictionary] http://archive.ics.uci.edu/ml/datasets/Bank+Marketing#
 
-[Unique ID Schema] The columns "County Code", "District Code", and "School
-Code" form a composite key, which together are equivalent to the unique id
-column CDS_CODE in dataset gradaf15, and which together are also equivalent to
-the unique id column CDS in dataset sat15.
+[Unique ID Schema] The columns "age", "job", "marital", "education", "default", "housing" and "load" compose an unique ID (hopefully).
 
 --
 
-[Dataset 3 Name] gradaf15
+[Dataset 3 Name] bank_se
 
-[Dataset Description] Graduates Meeting UC/CSU Entrance Requirements, AY2014-15
+[Dataset Description] This dataset contains additional attributes which was wiped out in the original bank-full dataset due to privacy reasons.
 
-[Experimental Unit Description] California public K-12 schools in AY2014-15
+[Experimental Unit Description] Each client in the Protuguese bank.
 
-[Number of Observations] 2,490
-
-[Number of Features] 15
-
-[Data Source] The file
-http://dq.cde.ca.gov/dataquest/dlfile/dlfile.aspx?cLevel=School&cYear=2014-15&cCat=UCGradEth&cPage=filesgradaf.asp
-was downloaded and edited to produce file gradaf15.xls by importing into Excel
-and setting all cell values to "Text" format
-
-[Data Dictionary] http://www.cde.ca.gov/ds/sd/sd/fsgradaf09.asp
-
-[Unique ID Schema] The column CDS_CODE is a unique id.
-
---
-
-[Dataset 4 Name] sat15
-
-[Dataset Description] SAT Test Results, AY2014-15
-
-[Experimental Unit Description] California public K-12 schools in AY2014-15
-
-[Number of Observations] 2,331
+[Number of Observations] 41188                    
 
 [Number of Features] 12
 
-[Data Source]  The file http://www3.cde.ca.gov/researchfiles/satactap/sat15.xls
-was downloaded and edited to produce file sat15-edited.xls by opening in Excel
-and setting all cell values to "Text" format
+[Data Source] This is a subset of the bank-additional-full dataset which can be found at http://archive.ics.uci.edu/ml/machine-learning-databases/00222/bank-additional.zipThis dataset only contains the client informations which serve as unique ID, and five new attributes.
 
-[Data Dictionary] http://www.cde.ca.gov/ds/sp/ai/reclayoutsat.asp
+[Data Dictionary] http://archive.ics.uci.edu/ml/datasets/Bank+Marketing#
 
-[Unique ID Schema] The column CDS is a unique id.
+[Unique ID Schema] The columns "age", "job", "marital", "education", "default", "housing" and "load" compose an unique ID (hopefully).
+
 ;
 
 
@@ -102,45 +64,30 @@ and setting all cell values to "Text" format
 * create output formats;
 
 /****proc format;
-    value Percent_Eligible_FRPM_K12_bins
-        low-<.39="Q1 FRPM"
-        .39-<.69="Q2 FRPM"
-        .69-<.86="Q3 FRPM"
-        .86-high="Q4 FRPM"
-    ;
-    value PCTGE1500_bins
-        low-20="Q1 SAT_Scores_GE_1500"
-        20-<37="Q2 SAT_Scores_GE_1500"
-        37-<56.3="Q3 SAT_Scores_GE_1500"
-        56.3-high="Q4 SAT_Scores_GE_1500"
+ 
     ;
 run;****/
 
 
 * setup environmental parameters;
 %let inputDataset1URL =
-https://github.com/stat6250/team-0_project2/blob/master/data/frpm1415-edited.xls?raw=true
+https://github.com/stat660/team-2_project2/blob/master/data/bank_nonsubsriber.csv?raw=true
 ;
 %let inputDataset1Type = XLS;
-%let inputDataset1DSN = frpm1415_raw;
+%let inputDataset1DSN = bank_nonsubsriber_raw;
 
 %let inputDataset2URL =
-https://github.com/stat6250/team-0_project2/blob/master/data/frpm1516-edited.xls?raw=true
+https://github.com/stat660/team-2_project2/blob/master/data/bank_subsriber.csv?raw=true
 ;
 %let inputDataset2Type = XLS;
-%let inputDataset2DSN = frpm1516_raw;
+%let inputDataset2DSN = bank_subsriber_raw;
 
 %let inputDataset3URL =
-https://github.com/stat6250/team-0_project2/blob/master/data/gradaf15.xls?raw=true
+https://github.com/stat660/team-2_project2/blob/master/data/bank_se.csv?raw=true
 ;
 %let inputDataset3Type = XLS;
-%let inputDataset3DSN = gradaf15_raw;
+%let inputDataset3DSN = bank_se_raw;
 
-%let inputDataset4URL =
-https://github.com/stat6250/team-0_project2/blob/master/data/sat15-edited.xls?raw=true
-;
-%let inputDataset4Type = XLS;
-%let inputDataset4DSN = sat15_raw;
 
 
 * load raw datasets over the wire, if they doesn't already exist;
@@ -187,57 +134,56 @@ https://github.com/stat6250/team-0_project2/blob/master/data/sat15-edited.xls?ra
     &inputDataset3URL.,
     &inputDataset3Type.
 )
-%loadDataIfNotAlreadyAvailable(
-    &inputDataset4DSN.,
-    &inputDataset4URL.,
-    &inputDataset4Type.
-)
+
 
 
 * sort and check raw datasets for duplicates with respect to their unique ids,
   removing blank rows, if needed;
 proc sort
-        nodupkey
-        data=frpm1415_raw
-        dupout=frpm1415_raw_dups
-        out=frpm1415_raw_sorted(where=(not(missing(School_Code))))
+        noduprecs
+        data=bank_nonsubsriber_raw
+        dupout=bank_nonsubsriber_raw_dups
+        out=bank_nonsubsriber_raw_sorted
     ;
     by
-        County_Code
-        District_Code
-        School_Code
+        age
+        job
+        marital
+        education
+        default
+        housing
+        load
     ;
 run;
 proc sort
-        nodupkey
-        data=frpm1516_raw
-        dupout=frpm1516_raw_dups
-        out=frpm1516_raw_sorted
+        data=bank_subsriber_raw
+        dupout=bank_subsriber_raw_dups
+        out=bank_subsriber_raw_sorted
     ;
     by
-        County_Code
-        District_Code
-        School_Code
+        age
+        job
+        marital
+        education
+        default
+        housing
+        load
     ;
 run;
 proc sort
-        nodupkey
-        data=gradaf15_raw
-        dupout=gradaf15_raw_dups
-        out=gradaf15_raw_sorted
+        noduprecs
+        data=bank_se_raw
+        dupout=bank_se_raw_dups
+        out=bank_se_raw_sorted
     ;
     by
-        CDS_CODE
-    ;
-run;
-proc sort
-        nodupkey
-        data=sat15_raw
-        dupout=sat15_raw_dups
-        out=sat15_raw_sorted
-    ;
-    by
-        CDS
+        age
+        job
+        marital
+        education
+        default
+        housing
+        load
     ;
 run;
 
@@ -292,7 +238,7 @@ run;
 * build analytic dataset from raw datasets with the least number of columns and
 minimal cleaning/transformation needed to address research questions in
 corresponding data-analysis files;
-data cde_2014_analytic_file;
+data bank_analytic_file;
     retain
         CDS_Code
         School_Name
