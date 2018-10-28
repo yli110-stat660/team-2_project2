@@ -6,29 +6,36 @@
 * 
 [Dataset 1 Name] bank_nonsubscribe
 
-[Dataset Description] This is a subset of the bank-full dataset with which the clients did not subscribe a term deposit. The bank-full dataset can be found at http://archive.ics.uci.edu/ml/machine-learning-databases/00222/bank.zip
+[Dataset Description] This is a subset of the bank-additional dataset with 
+which the clients did not subscribe a term deposit.
+The bank-additional dataset can be found at the following website
+http://archive.ics.uci.edu/ml/machine-learning-databases/00222/bank.zip
 
-[Experimental Unit Description] Each client in the Protuguese bank who didn't subscribe a term deposit.
 
-[Number of Observations] 39922                    
+[Experimental Unit Description] Each client in the Protuguese bank who didn't 
+subscribe a term deposit.
+
+[Number of Observations] 36548      
 
 [Number of Features] 17
 
-[Data Source]  A subset of bank-full with y variable being "no". 
+[Data Source] A subset of bank-full with y variable being "no". 
 
-[Data Dictionary] http://archive.ics.uci.edu/ml/datasets/Bank+Marketing#
+[Data Dictionary] archive.ics.uci.edu/ml/datasets/Bank+Marketing#
 
-[Unique ID Schema] The columns "age", "job", "marital", "education", "default", "housing" and "load" compose an unique ID (hopefully).
+[Unique ID Schema] A variable named "ID" was created to identify each client.
 
 --
 
 [Dataset 2 Name] bank_subscribe
 
-[Dataset Description] This is a subset of the bank-full dataset with which the clients subscribed a term deposit.
+[Dataset Description] This is a subset of the bank-full dataset with which 
+the clients subscribed a term deposit.
 
-[Experimental Unit Description]  Each client in the Protuguese bank who subscribed a term deposit.
+[Experimental Unit Description] Each client in the Protuguese bank who 
+subscribed a term deposit.
 
-[Number of Observations] 5289                    
+[Number of Observations] 4640     
 
 [Number of Features] 17
 
@@ -36,25 +43,30 @@
 
 [Data Dictionary] http://archive.ics.uci.edu/ml/datasets/Bank+Marketing#
 
-[Unique ID Schema] The columns "age", "job", "marital", "education", "default", "housing" and "load" compose an unique ID (hopefully).
+[Unique ID Schema] A variable named "ID" was created to identify each client.
 
 --
 
 [Dataset 3 Name] bank_se
 
-[Dataset Description] This dataset contains additional attributes which was wiped out in the original bank-full dataset due to privacy reasons.
+[Dataset Description] This dataset contains additional attributes which 
+wasn't included in the original bank-full dataset.
 
-[Experimental Unit Description] Each client in the Protuguese bank.
+[Experimental Unit Description] Each client in the Protuguese bank who 
+subscribed a term deposit.
 
-[Number of Observations] 41188                    
+[Number of Observations] 41188
 
-[Number of Features] 12
+[Number of Features] 6
 
-[Data Source] This is a subset of the bank-additional-full dataset which can be found at http://archive.ics.uci.edu/ml/machine-learning-databases/00222/bank-additional.zipThis dataset only contains the client informations which serve as unique ID, and five new attributes.
+[Data Source] This is a subset of the bank-additional-full dataset which can 
+be found at 
+http://archive.ics.uci.edu/ml/machine-learning-databases/00222/bank-additional.zip
+This dataset only contains ID column and five new socioeconomics attributes.
 
 [Data Dictionary] http://archive.ics.uci.edu/ml/datasets/Bank+Marketing#
 
-[Unique ID Schema] The columns "age", "job", "marital", "education", "default", "housing" and "load" compose an unique ID (hopefully).
+[Unique ID Schema] The column ID is a unique id.
 
 ;
 
@@ -62,32 +74,34 @@
 * environmental setup;
 
 * create output formats;
-
-/****proc format;
- 
+proc format;
+    value y
+        no="Client did not subscribe a term deposit"
+        yes="Client subscribed a term deposit"
     ;
-run;****/
+run;
 
 
 * setup environmental parameters;
 %let inputDataset1URL =
 https://github.com/stat660/team-2_project2/blob/master/data/bank_nonsubsriber.csv?raw=true
 ;
-%let inputDataset1Type = CVS;
-%let inputDataset1DSN = bank_nonsubsriber_raw;
+%let inputDataset1Type = CSV;
+%let inputDataset1DSN = bank_nonsubscriber;
+
 
 %let inputDataset2URL =
 https://github.com/stat660/team-2_project2/blob/master/data/bank_subsriber.csv?raw=true
 ;
-%let inputDataset2Type = CVS;
-%let inputDataset2DSN = bank_subsriber_raw;
+%let inputDataset2Type = CSV;
+%let inputDataset2DSN = bank_subscriber;
 
 %let inputDataset3URL =
 https://github.com/stat660/team-2_project2/blob/master/data/bank_se.csv?raw=true
 ;
-%let inputDataset3Type = CVS;
-%let inputDataset3DSN = bank_se_raw;
 
+%let inputDataset3Type = CSV;
+%let inputDataset3DSN = bank_se;
 
 
 * load raw datasets over the wire, if they doesn't already exist;
@@ -136,129 +150,43 @@ https://github.com/stat660/team-2_project2/blob/master/data/bank_se.csv?raw=true
 )
 
 
-
 * sort and check raw datasets for duplicates with respect to their unique ids,
   removing blank rows, if needed;
-proc sort
-        noduprecs
-        data=bank_nonsubsriber_raw
-        dupout=bank_nonsubsriber_raw_dups
-        out=bank_nonsubsriber_raw_sorted
-    ;
-    by
-        age
-        job
-        marital
-        education
-        default
-        housing
-        load
-    ;
-run;
-proc sort
-        data=bank_subsriber_raw
-        dupout=bank_subsriber_raw_dups
-        out=bank_subsriber_raw_sorted
-    ;
-    by
-        age
-        job
-        marital
-        education
-        default
-        housing
-        load
-    ;
-run;
-proc sort
-        noduprecs
-        data=bank_se_raw
-        dupout=bank_se_raw_dups
-        out=bank_se_raw_sorted
-    ;
-    by
-        age
-        job
-        marital
-        education
-        default
-        housing
-        load
-    ;
-run;
+/** This step was eleminated because the "ID" variable was created, thus this
+step is useless **/
 
+* combine the bank_nonsubsriber and bank_subscriber datasets vertically. Both
+datasets have identical column names;
+data bank_client;
+    length
+        job       $20.
+        education $20.
+        y         $3.
+    ;
+    format /*HAD TO SPECIFY THE FORMAT, THE LENGTH ALONE STILL TRUNCATES DATA*/
+        y         $3.
+        education $20.
+        job       $20.
+    ;
+    set
+        bank_nonsubscriber
+        bank_subscriber
 
-* combine FRPM data vertically, combine composite key values into a primary key
-  key, and compute year-over-year change in Percent_Eligible_FRPM_K12,
-  retaining all AY2014-15 fields and y-o-y Percent_Eligible_FRPM_K12 change;
-data bank_full;
-       set
-        bank_subscribed_sorted(in=ay2015_data_row)
-        bank_nonsubscribed_sorted(in=ay2014_data_row)
     ;
   
     by
-        age
-        job
-        marital
-        education
-        default
-        housing
-        load
+        id
     ;
-   
 run;
 
-
-* build analytic dataset from raw datasets with the least number of columns and
-minimal cleaning/transformation needed to address research questions in
-corresponding data-analysis files;
-data bank_analytic_file;
-    retain
-        age
-        job
-        marital
-        education
-        default
-        housing
-        load
-        poutcome
-        y
-        cons.price
-    ;
-    keep
-        age
-        job
-        marital
-        education
-        default
-        housing
-        load
-        poutcome
-        y
-        cons.price
-    ;
+* build analytic dataset from combining bank_client and bank_se horizontally,
+the matching column is ID.;
+data bank_analysis;
     merge
-        bank_full
-        bank_se_raw_sorted
-       
+        bank_client
+        bank_se
     ;
     by
-        age
-        job
-        marital
-        education
-        default
-        housing
-        load
+        ID
     ;
-
 run;
-
-
-* use proc sort to create a temporary sorted table in descending by
-
-
-
-* use proc sort to create a temporary sorted table in descending by
-
