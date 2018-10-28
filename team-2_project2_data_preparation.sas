@@ -49,10 +49,11 @@ subscribed a term deposit.
 
 [Dataset 3 Name] bank_se
 
-[Dataset Description] Graduates Meeting UC/CSU Entrance Requirements, AY2014-15
+[Dataset Description] This dataset contains additional attributes which 
+wasn't included in the original bank-full dataset.
 
-[Experimental Unit Description] This dataset contains additional attributes
-which wasn't included in the original bank-full dataset.
+[Experimental Unit Description] Each client in the Protuguese bank who 
+subscribed a term deposit.
 
 [Number of Observations] 41188
 
