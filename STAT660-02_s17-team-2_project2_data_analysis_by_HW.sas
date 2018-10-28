@@ -52,7 +52,7 @@ Follow-up Steps: Add more client demographic data into the data set or combine
 with other data results of bank clients analysis.
 
 proc freq 
-    data =bank_analytic_file
+    data =bank_analysis
      ;
      table 
         age 
@@ -61,7 +61,7 @@ proc freq
 run;
 
 proc freq 
-    data =bank_analytic_file
+    data =bank_analysis
      ;
      table 
         job 
@@ -70,7 +70,7 @@ proc freq
 run;
 
 proc freq 
-    data =bank_analytic_file
+    data =bank_analysis
      ;
      table 
         marital
@@ -79,7 +79,7 @@ proc freq
 run;
 
 proc freq 
-    data =bank_analytic_file
+    data =bank_analysis
      ;
      table 
         education
@@ -88,7 +88,7 @@ proc freq
 run;
 
 proc freq 
-    data =bank_analytic_file
+    data =bank_analysis
      ;
      table 
         housing
@@ -97,7 +97,7 @@ proc freq
 run;
 
 proc freq 
-    data =bank_analytic_file
+    data =bank_analysis
      ;
      table 
         loan
@@ -107,7 +107,7 @@ run;
 
 
 proc means 
-     data =bank_analytic_file 
+     data =bank_analysis 
      mean median maxdec=2
      ;
      var 
@@ -149,7 +149,7 @@ Follow-up Steps: Find out a propriate value instead of using 'unknown' value
 ;
 
 proc logistic 
-    data=bank_analytic_file
+    data=bank_analysis
     ;
     model y = poutcome
     ;
