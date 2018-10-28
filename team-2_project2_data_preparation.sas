@@ -67,6 +67,7 @@ This dataset only contains ID column and five new socioeconomics attributes.
 [Data Dictionary] http://archive.ics.uci.edu/ml/datasets/Bank+Marketing#
 
 [Unique ID Schema] The column ID is a unique id.
+
 ;
 
 
@@ -80,12 +81,14 @@ proc format;
     ;
 run;
 
+
 * setup environmental parameters;
 %let inputDataset1URL =
 https://github.com/stat660/team-2_project2/blob/master/data/bank_nonsubsriber.csv?raw=true
 ;
 %let inputDataset1Type = CSV;
 %let inputDataset1DSN = bank_nonsubscriber;
+
 
 %let inputDataset2URL =
 https://github.com/stat660/team-2_project2/blob/master/data/bank_subsriber.csv?raw=true
@@ -96,6 +99,7 @@ https://github.com/stat660/team-2_project2/blob/master/data/bank_subsriber.csv?r
 %let inputDataset3URL =
 https://github.com/stat660/team-2_project2/blob/master/data/bank_se.csv?raw=true
 ;
+
 %let inputDataset3Type = CSV;
 %let inputDataset3DSN = bank_se;
 
@@ -167,7 +171,9 @@ data bank_client;
     set
         bank_nonsubscriber
         bank_subscriber
+
     ;
+  
     by
         id
     ;
@@ -183,4 +189,4 @@ data bank_analysis;
     by
         ID
     ;
- run;
+run;
