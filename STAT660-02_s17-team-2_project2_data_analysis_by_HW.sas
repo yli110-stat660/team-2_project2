@@ -107,7 +107,7 @@ run;
 
 
 proc means 
-     data =bank_analysis 
+    data =bank_analysis 
      mean median maxdec=2
      ;
      var 
