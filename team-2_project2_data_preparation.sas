@@ -21,7 +21,7 @@ subscribe a term deposit.
 
 [Data Source] A subset of bank-full with y variable being "no". 
 
-[Data Dictionary] archive.ics.uci.edu/ml/datasets/Bank+Marketing#
+[Data Dictionary] http://archive.ics.uci.edu/ml/datasets/Bank+Marketing#
 
 [Unique ID Schema] A variable named "ID" was created to identify each client.
 
