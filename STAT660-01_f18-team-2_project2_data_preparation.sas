@@ -74,6 +74,7 @@ This dataset only contains ID column and five new socioeconomics attributes.
 
 * create output formats;
 proc format;
+
     value $y
         "no"  = "Client did not subscribe a term deposit"
         "yes" = "Client subscribed a term deposit"
@@ -148,6 +149,7 @@ https://github.com/stat660/team-2_project2/blob/master/data/bank_se.csv?raw=true
 
 * sort and check raw datasets for duplicates with respect to their unique ids,
   removing blank rows, if needed;
+
 proc sort
         nodupkey
         data = bank_nonsubscriber
@@ -282,4 +284,4 @@ data bank_analysis;
     by
         ID
     ;
- run;
+run;
