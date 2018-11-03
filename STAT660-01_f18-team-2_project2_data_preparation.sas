@@ -149,76 +149,76 @@ https://github.com/stat660/team-2_project2/blob/master/data/bank_se.csv?raw=true
 * sort and check raw datasets for duplicates with respect to their unique ids,
   removing blank rows, if needed;
 proc sort
-		nodupkey
-		data = bank_nonsubscriber
-		dupout = bank_nonsubscriber_dups
-		out = bank_nonsubscriber_sorted
-	;
-	by
-		id
-	;
+        nodupkey
+        data = bank_nonsubscriber
+        dupout = bank_nonsubscriber_dups
+        out = bank_nonsubscriber_sorted
+    ;
+    by
+        id
+    ;
 run;
 
 proc sort
-		nodupkey
-		data = bank_subscriber
-		dupout = bank_subscriber_dups
-		out = bank_subscriber_sorted
-	;
-	by
-		id
-	;
+        nodupkey
+        data = bank_subscriber
+        dupout = bank_subscriber_dups
+        out = bank_subscriber_sorted
+    ;
+    by
+        id
+    ;
 run;
 
 proc sort
-		nodupkey
-		data = bank_se
-		dupout = bank_se_dups
-		out = bank_se_sorted
-	;
-	by
-		id
-	;
+        nodupkey
+        data = bank_se
+        dupout = bank_se_dups
+        out = bank_se_sorted
+    ;
+    by
+        id
+    ;
 run;
 
 * combine the bank_nonsubsriber and bank_subscriber datasets vertically. Both
 datasets have identical column names;
 
 data bank_client;
-	retain
-		id
-		age
-		job
-		marital
-		education
-		default
-		housing
-		loan
-		contact
-		duration
-		campaign
-		pdays
-		previous
-		poutcome
-		y
-	;
-	keep
-		id
-		age
-		job
-		marital
-		education
-		default
-		housing
-		loan
-		contact
-		duration
-		campaign
-		pdays
-		previous
-		poutcome
-		y
-	;
+    retain
+        id
+        age
+        job
+        marital
+        education
+        default
+        housing
+        loan
+        contact
+        duration
+        campaign
+        pdays
+        previous
+        poutcome
+        y
+    ;
+    keep
+        id
+        age
+        job
+        marital
+        education
+        default
+        housing
+        loan
+        contact
+        duration
+        campaign
+        pdays
+        previous
+        poutcome
+        y
+    ;
     length
         job       $20.
         education $20.
@@ -241,40 +241,40 @@ run;
 * build analytic dataset from combining bank_client and bank_se horizontally,
 the matching column is ID.;
 data bank_analysis;
-	retain
-		id
-		age
-		job
-		marital
-		education
-		default
-		housing
-		loan
-		contact
-		duration
-		campaign
-		pdays
-		previous
-		poutcome
-		y
-	;
-	keep
-		id
-		age
-		job
-		marital
-		education
-		default
-		housing
-		loan
-		contact
-		duration
-		campaign
-		pdays
-		previous
-		poutcome
-		y
-	;
+    retain
+        id
+        age
+        job
+        marital
+        education
+        default
+        housing
+        loan
+        contact
+        duration
+        campaign
+        pdays
+        previous
+        poutcome
+        y
+    ;
+    keep
+        id
+        age
+        job
+        marital
+        education
+        default
+        housing
+        loan
+        contact
+        duration
+        campaign
+        pdays
+        previous
+        poutcome
+        y
+    ;
     merge
         bank_client
         bank_se
