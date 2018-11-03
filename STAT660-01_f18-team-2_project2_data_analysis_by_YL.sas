@@ -60,22 +60,22 @@ attribute.
 ;
 
 proc sort 
-		data=bank_analysis
-	;
-	by 
-		y
-	;
+        data=bank_analysis
+    ;
+    by 
+        y
+    ;
 run;
 
 proc univariate 
-		data = bank_analysis
-		plot
-	;
-	var duration
-	;
-	by
-		y
-	; 
+        data = bank_analysis
+        plot
+    ;
+    var duration
+    ;
+    by
+        y
+    ; 
 run;
 
 title2
@@ -91,14 +91,14 @@ footnote2
 ;
 
 proc ttest
-		data = bank_analysis
-	;
-	var 
-		duration
-	;
-	class 
-		y 
-	;
+        data = bank_analysis
+    ;
+    var 
+        duration
+    ;
+    class 
+        y 
+    ;
 run;
 
 title;
@@ -151,7 +151,7 @@ proc logistic
         data = bank_analysis
     ;
     model
-		y = emp_var_rate cons_price_idx cons_conf_idx euribor3m nr_employed
+        y = emp_var_rate cons_price_idx cons_conf_idx euribor3m nr_employed
     ;
 run;
 
@@ -201,12 +201,12 @@ predict easy, and accurate results.
 proc logistic
         data=bank_analysis
     ;
-	class
-		poutcome
-	;
+    class
+        poutcome
+    ;
     model
         y = campaign previous poutcome
-    ;	
+    ;   
 run;
 
 title;
