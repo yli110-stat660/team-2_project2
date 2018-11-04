@@ -270,7 +270,7 @@ data bank_analysis;
         cons_conf_idx
         euribor3m
         nr_employed
-		age_range
+        age_range
     ;
     keep
         id
@@ -293,7 +293,7 @@ data bank_analysis;
         cons_conf_idx
         euribor3m
         nr_employed
-		age_range
+        age_range
     ;
     merge
         bank_client
@@ -303,31 +303,31 @@ data bank_analysis;
         ID
     ;
     if 
-		age < 27 
-	then 
-		do;
-			age_range = "17-27";
-		end;
+        age < 27 
+    then 
+        do;
+            age_range = "17-27";
+        end;
     else if 
-		age < 38 
-	then 
-		do;
-			age_range = "28-38";
-		end;
+        age < 38 
+    then 
+        do;
+            age_range = "28-38";
+        end;
     else if 
-		age < 48 
-	then 
-		do;
-			age_range = "39-48";
-		end;
+        age < 48 
+    then 
+        do;
+            age_range = "39-48";
+        end;
     else if 
-		age < 59 
-	then 
-		do;
-			age_range = "49-59";
-		end;
+        age < 59 
+    then 
+        do;
+            age_range = "49-59";
+        end;
     else 
-		do;
-			agen_range = "over 60";
-		end;
+        do;
+            agen_range = "over 60";
+        end;
 run;
