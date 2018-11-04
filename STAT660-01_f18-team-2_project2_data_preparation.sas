@@ -78,13 +78,13 @@ proc format;
         "no"  = "Client did not subscribe a term deposit"
         "yes" = "Client subscribed a term deposit"
     ;
-	value age
-		17-27 = "17-27"
-		28-38 = "28-38"
-		39-48 = "39-48"
-		49-59 = "49-59"
-		60-98 = "over 60"
-	;
+    value age
+        17-27 = "17-27"
+        28-38 = "28-38"
+        39-48 = "39-48"
+        49-59 = "49-59"
+        60-98 = "over 60"
+    ;
 run;
 
 * setup environmental parameters;
@@ -265,11 +265,12 @@ data bank_analysis;
         previous
         poutcome
         y
-		emp_var_rate
-		cons_price_idx
-		cons_conf_idx
-		euribor3m
-		nr_employed
+        emp_var_rate
+        cons_price_idx
+        cons_conf_idx
+        euribor3m
+        nr_employed
+		age_range
     ;
     keep
         id
@@ -287,11 +288,12 @@ data bank_analysis;
         previous
         poutcome
         y
-		emp_var_rate
-		cons_price_idx
-		cons_conf_idx
-		euribor3m
-		nr_employed
+        emp_var_rate
+        cons_price_idx
+        cons_conf_idx
+        euribor3m
+        nr_employed
+		age_range
     ;
     merge
         bank_client
@@ -300,4 +302,32 @@ data bank_analysis;
     by
         ID
     ;
+    if 
+		age < 27 
+	then 
+		do;
+			age_range = "17-27";
+		end;
+    else if 
+		age < 38 
+	then 
+		do;
+			age_range = "28-38";
+		end;
+    else if 
+		age < 48 
+	then 
+		do;
+			age_range = "39-48";
+		end;
+    else if 
+		age < 59 
+	then 
+		do;
+			age_range = "49-59";
+		end;
+    else 
+		do;
+			agen_range = "over 60";
+		end;
 run;
