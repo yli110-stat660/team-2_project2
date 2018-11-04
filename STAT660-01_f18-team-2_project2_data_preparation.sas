@@ -74,11 +74,17 @@ This dataset only contains ID column and five new socioeconomics attributes.
 
 * create output formats;
 proc format;
-
     value $y
         "no"  = "Client did not subscribe a term deposit"
         "yes" = "Client subscribed a term deposit"
     ;
+	value age
+		17-27 = "17-27"
+		28-38 = "28-38"
+		39-48 = "39-48"
+		49-59 = "49-59"
+		60-98 = "over 60"
+	;
 run;
 
 * setup environmental parameters;
@@ -259,6 +265,11 @@ data bank_analysis;
         previous
         poutcome
         y
+		emp_var_rate
+		cons_price_idx
+		cons_conf_idx
+		euribor3m
+		nr_employed
     ;
     keep
         id
@@ -276,6 +287,11 @@ data bank_analysis;
         previous
         poutcome
         y
+		emp_var_rate
+		cons_price_idx
+		cons_conf_idx
+		euribor3m
+		nr_employed
     ;
     merge
         bank_client
