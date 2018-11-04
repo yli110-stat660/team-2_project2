@@ -238,8 +238,8 @@ data bank_client;
         job       $20.
     ;
     set
-        bank_nonsubscriber
-        bank_subscriber
+        bank_nonsubscriber_sorted
+        bank_subscriber_sorted
     ;
     by
         id
@@ -295,7 +295,7 @@ data bank_analysis;
     ;
     merge
         bank_client
-        bank_se
+        bank_se_sorted
     ;
     by
         ID
