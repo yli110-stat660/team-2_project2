@@ -227,19 +227,9 @@ data bank_client;
         poutcome
         y
     ;
-    length
-        job       $20.
-        education $20.
-        y         $3.
-    ;
-    format /*HAD TO SPECIFY THE FORMAT, THE LENGTH ALONE STILL TRUNCATES DATA*/
-        y         $3.
-        education $20.
-        job       $20.
-    ;
     set
-        bank_nonsubscriber_sorted
         bank_subscriber_sorted
+		bank_nonsubscriber_sorted        
     ;
     by
         id
@@ -302,32 +292,6 @@ data bank_analysis;
     by
         ID
     ;
-    if 
-        age < 27 
-    then 
-        do;
-            age_range = "17-27";
-        end;
-    else if 
-        age < 38 
-    then 
-        do;
-            age_range = "28-38";
-        end;
-    else if 
-        age < 48 
-    then 
-        do;
-            age_range = "39-48";
-        end;
-    else if 
-        age < 59 
-    then 
-        do;
-            age_range = "49-59";
-        end;
-    else 
-        do;
-            agen_range = "over 60";
-        end;
+    age_range = put(age, age.)
+	;
 run;
