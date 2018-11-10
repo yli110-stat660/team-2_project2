@@ -229,7 +229,7 @@ data bank_client;
     ;
     set
         bank_subscriber_sorted
-		bank_nonsubscriber_sorted        
+        bank_nonsubscriber_sorted        
     ;
     by
         id
@@ -293,5 +293,5 @@ data bank_analysis;
         ID
     ;
     age_range = put(age, age.)
-	;
+    ;
 run;
